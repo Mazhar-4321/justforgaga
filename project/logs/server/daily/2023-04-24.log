@@ -1,0 +1,367 @@
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T07:00:21.798Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:00:21.906Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T07:28:52.357Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:28:52.412Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/ 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T07:31:09.192Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T07:33:19.589Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:33:19.641Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T07:35:22.372Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:35:22.427Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T07:39:13.266Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:39:13.321Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T07:40:57.552Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:40:57.606Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T07:41:50.527Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:41:50.597Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T07:43:42.620Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:43:42.675Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T07:44:32.629Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:44:32.684Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:49:19.501Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T07:49:59.075Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T07:49:59.124Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/ 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T08:41:18.614Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/ 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T08:43:12.305Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T08:53:21.331Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T08:53:21.390Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T08:54:56.793Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T08:54:56.841Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T10:33:22.008Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T10:33:22.065Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T10:34:02.275Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T10:34:02.329Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T10:34:31.772Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T10:34:31.828Z"}
+error: 
+    status - 500 
+    message - ReferenceError: userData is not defined
+    at _callee5$ (C:\Users\SyedMazharAli\Desktop\postgre\project\src\services\/user.service.js:73:43)
+    at tryCatch (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:44:17)
+    at Generator.<anonymous> (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:125:22)
+    at Generator.next (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:69:21)
+    at asyncGeneratorStep (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\asyncToGenerator.js:3:24)
+    at _next (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\asyncToGenerator.js:22:9)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/login 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T10:34:44.716Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T10:35:11.066Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T10:35:11.136Z"}
+error: 
+    status - 500 
+    message - ReferenceError: userData is not defined
+    at _callee5$ (C:\Users\SyedMazharAli\Desktop\postgre\project\src\services\/user.service.js:73:43)
+    at tryCatch (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:44:17)
+    at Generator.<anonymous> (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:125:22)
+    at Generator.next (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:69:21)
+    at asyncGeneratorStep (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\asyncToGenerator.js:3:24)
+    at _next (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\asyncToGenerator.js:22:9)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/login 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T10:35:18.180Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T10:35:32.040Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T10:35:32.093Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T10:35:45.805Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T10:35:45.861Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T10:37:09.651Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T10:37:09.715Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T10:39:44.982Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T10:39:45.040Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T10:58:11.818Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T10:58:11.873Z"}
+error: 
+    status - 500 
+    message - SyntaxError: Unexpected token } in JSON at position 75
+    at JSON.parse (<anonymous>)
+    at parse (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\body-parser\lib\types\json.js:89:19)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\body-parser\lib\read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:204:9)
+    at invokeCallback (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\raw-body\index.js:231:16)
+    at done (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\raw-body\index.js:220:7)
+    at IncomingMessage.onEnd (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\raw-body\index.js:280:7)
+    at IncomingMessage.emit (node:events:513:28)
+    at IncomingMessage.emit (node:domain:489:12)
+    at endReadableNT (node:internal/streams/readable:1359:12)
+    at processTicksAndRejections (node:internal/process/task_queues:82:21) 
+    url - /api/v1/users/validateEmail 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T10:58:17.511Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T10:59:33.860Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T10:59:33.908Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:02:35.153Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:02:35.207Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:34:49.993Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:34:50.050Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/validateEmail 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T11:35:12.967Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/validateEmail 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T11:37:01.350Z"}
+error: 
+    status - 500 
+    message - ValidationError: "role" is required 
+    url - /api/v1/users/ 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T11:40:01.011Z"}
+error: 
+    status - 500 
+    message - Error: Invalid OTP
+    at _callee2$ (C:\Users\SyedMazharAli\Desktop\postgre\project\src\services\/user.service.js:44:11)
+    at tryCatch (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:44:17)
+    at Generator.<anonymous> (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:125:22)
+    at Generator.next (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:69:21)
+    at asyncGeneratorStep (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\asyncToGenerator.js:3:24)
+    at _next (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\asyncToGenerator.js:22:9)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/ 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T11:40:13.694Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:41:19.056Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:41:19.104Z"}
+error: 
+    status - 500 
+    message - Error: Invalid OTP
+    at _callee2$ (C:\Users\SyedMazharAli\Desktop\postgre\project\src\services\/user.service.js:47:11)
+    at tryCatch (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:44:17)
+    at Generator.<anonymous> (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:125:22)
+    at Generator.next (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:69:21)
+    at asyncGeneratorStep (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\asyncToGenerator.js:3:24)
+    at _next (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\asyncToGenerator.js:22:9)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/ 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T11:41:22.270Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:43:36.130Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:43:36.187Z"}
+error: 
+    status - 500 
+    message - Error: Invalid OTP
+    at _callee2$ (C:\Users\SyedMazharAli\Desktop\postgre\project\src\services\/user.service.js:47:11)
+    at tryCatch (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:44:17)
+    at Generator.<anonymous> (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:125:22)
+    at Generator.next (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\regeneratorRuntime.js:69:21)
+    at asyncGeneratorStep (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\asyncToGenerator.js:3:24)
+    at _next (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\@babel\runtime\helpers\asyncToGenerator.js:22:9)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/ 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T11:43:41.154Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:46:14.973Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:46:15.027Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/ 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T11:46:25.493Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:52:01.875Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:52:01.923Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:52:45.966Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:52:46.034Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:52:56.990Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:52:57.034Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:55:46.304Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:55:46.358Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:55:51.007Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:55:51.054Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:57:07.409Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:57:07.457Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T11:58:09.482Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:58:09.528Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:58:17.785Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:59:37.280Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T11:59:58.136Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:00:56.053Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:00:56.105Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:02:21.919Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:02:21.977Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/forgetPassword 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:02:24.417Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:03:00.792Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:03:00.846Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/forgetPassword 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:03:30.994Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:04:14.115Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:04:14.169Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/forgetPassword 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:04:17.066Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:05:19.933Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:05:20.003Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/forgetPassword 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:05:33.496Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:06:19.873Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:06:19.931Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/forgetPassword 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:06:23.421Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:07:16.178Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:07:16.243Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/forgetPassword 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:07:16.874Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:07:48.484Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:07:48.540Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/forgetPassword 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:07:52.637Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/reset 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:12:42.614Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:13:15.162Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:13:15.210Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:15:15.522Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:15:15.574Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/forgetPassword 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:24:11.140Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/forgetPassword 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:25:26.203Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:42:37.574Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:42:37.622Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:44:53.068Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:44:53.120Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:47:31.311Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:47:31.364Z"}
+error: 
+    status - 500 
+    message - Error: 
+    at Query.run (C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\dialects\mysql\query.js:46:25)
+    at C:\Users\SyedMazharAli\Desktop\postgre\project\node_modules\sequelize\src\sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+    url - /api/v1/users/forgetPassword 
+    method - POST 
+    IP - ::1
+   {"timestamp":"2023-04-24T12:47:43.400Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:48:07.889Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:48:07.930Z"}
+info: Server started at http://localhost:3005/api/v1/ {"timestamp":"2023-04-24T12:50:27.765Z"}
+info: Connected to the database. {"timestamp":"2023-04-24T12:50:27.816Z"}
