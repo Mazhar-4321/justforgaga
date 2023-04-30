@@ -1,6 +1,6 @@
 import express from 'express';
 import * as userController from '../controllers/user.controller';
-import { newUserValidator } from '../validators/user.validator';
+import { loginURIValidator, newUserValidator } from '../validators/user.validator';
 import { userAuth } from '../middlewares/auth.middleware';
 
 const router = express.Router();
@@ -12,7 +12,7 @@ router.get('', userController.getAllUsers);
 router.post('', newUserValidator, userController.newUser);
 
 //route to get a single user by their user id
-router.post('/login',  userController.getUser);
+router.post('/login',loginURIValidator,  userController.getUser);
 
 router.post('/validateEmail',userController.validateEmail);
 

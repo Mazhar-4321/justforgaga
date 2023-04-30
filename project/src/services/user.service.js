@@ -1,68 +1,51 @@
-import { error } from 'winston';
-import sequelize, { DataTypes } from '../config/database';
+import sequelize from '../config/database';
 import { sendEmail } from '../utils/user.util';
 import Jwt from 'jsonwebtoken';
-const User = require('../models/user')(sequelize, DataTypes);
 const bcrypt = require('bcrypt');
 
-//get all users
-export const getAllUsers = async () => {
-  const data = await User.findAll();
-  return data;
-};
 
-//create new user
+
+
 export const newUser = async (body) => {
-
-  const { QueryTypes } = require('sequelize');
-  const expiry = Date.now();
-  var otpResponse = await sequelize.query('select * from otp where otp=? and email=? and expiry>=?'
-    , {
-      replacements: [body.otp, body.email, expiry],
-      type: QueryTypes.SELECT
-    })
-  console.log("otpResponse", otpResponse)
-  if (otpResponse.length > 0) {
-    body.password = bcrypt.hashSync(body.password, 10);
-    var childTable = await sequelize.query(
-      `insert into role(email,role_name)
+  try {
+    const { QueryTypes } = require('sequelize');
+    const expiry = Date.now();
+    var otpResponse = await sequelize.query('select * from otp where otp=? and email=? and expiry>=?'
+      , {
+        replacements: [body.otp, body.email, expiry],
+        type: QueryTypes.SELECT
+      })
+    console.log("otpResponse", otpResponse)
+    if (otpResponse.length > 0) {
+      body.password = bcrypt.hashSync(body.password, 10);
+      var childTable = await sequelize.query(
+        `insert into role(email,role_name)
   values(?,?)`,
-      {
-        replacements: [body.email, body.role],
-        type: QueryTypes.INSERT
-      }
-    );
-    var response = await sequelize.query(
-      `insert into users(firstName,lastName,email,password)
+        {
+          replacements: [body.email, body.role],
+          type: QueryTypes.INSERT
+        }
+      );
+      var response = await sequelize.query(
+        `insert into users(firstName,lastName,email,password)
   values(?,?,?,?)`,
-      {
-        replacements: [body.firstName, body.lastName, body.email, body.password],
-        type: QueryTypes.INSERT
-      }
-    );
-    console.log(response)
-    return response;
-  } else {
+        {
+          replacements: [body.firstName, body.lastName, body.email, body.password],
+          type: QueryTypes.INSERT
+        }
+      );
+      console.log(response)
+      return response;
+    } else {
 
-    throw new Error('Invalid OTP')
+      throw new Error('Invalid OTP')
+    }
+  } catch (err) {
+    console.log(err)
+    throw new Error(err)
   }
 };
 
-//update single user
-export const updateUser = async (id, body) => {
-  await User.update(body, {
-    where: { id: id }
-  });
-  return body;
-};
-
-//delete single user
-export const deleteUser = async (id) => {
-  await User.destroy({ where: { id: id } });
-  return '';
-};
-
-//get single user
 export const getUser = async (body) => {
   const { QueryTypes } = require('sequelize');
 
@@ -76,25 +59,28 @@ export const getUser = async (body) => {
       type: QueryTypes.SELECT
     }
   );
-  console.log("response from db", response)
+ 
   if (response.length > 0) {
     const verified = bcrypt.compareSync(body.password, response[0].password)
     if (!verified) {
-      logger.error(`Attempt To Login With Invalid Password ${body.email}`)
-      throw new Error('Invalid Password')
+      throw new Error('Invalid Username Or Password')
     } else {
-      var token = await Jwt.sign({ email: body.email }, process.env.SECRET_KEY);
+
+      var token = await Jwt.sign({ email: body.email}, process.env.SECRET_KEY);
       console.log("token", token)
-      return response[0].role_name + "," + token
+      if(response[0].role_name==='student')
+      return response[0].role_name + "," + response[0].firstName+","+response[0].lastName+","+response[0].email +","+ token
+      else
+      return response[0].role_name + "," +response[0].email + "," + token
     }
   } else {
-
+    throw new Error("Invalid Password")
   }
-  return response;
+
 };
 
 export const validateEmail = async (body) => {
-  console.log("reached validation", body)
+  console.log("reached validation",body)
   const { QueryTypes } = require('sequelize');
   let otp = Math.floor(1000 + Math.random() * 9000);
   let expiration = Date.now() + 1000 * 60 * 10 + otp;
@@ -115,12 +101,14 @@ export const validateEmail = async (body) => {
       // return response;
     }
   } catch (err) {
-    console.log("my error", err.name)
-    if(err.name==='SequelizeUniqueConstraintError'){
+    console.log("my error", err.name, body.email)
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      await sendEmail(body.email, `4 digit Otp Expires in 10 mins :${otp}`, 'Email Validation for Registration Process')
+
       var response = await sequelize.query(
         ` update otp set otp=? , expiry=? where email=?`,
         {
-          replacements: [otp,  expiration,body.email],
+          replacements: [otp, expiration, body.email],
           type: QueryTypes.UPDATE
         }
       );
@@ -140,21 +128,26 @@ export const forgetPassword = async (body) => {
 
 export const reset = async (body) => {
   const { QueryTypes } = require('sequelize');
+  try{
   const expiry = Date.now();
   var otpResponse = await sequelize.query('select * from otp where otp=? and email=? and expiry>=?'
     , {
       replacements: [body.otp, body.email, expiry],
       type: QueryTypes.SELECT
     })
-  console.log("otpResponse", otpResponse)
   if (otpResponse.length > 0) {
     var response = await sequelize.query(
       ` update users set password=? where email=?;`,
       {
-        replacements: [body.password, body.email],
+        replacements: [bcrypt.hashSync(body.password, 10), body.email],
         type: QueryTypes.UPDATE
       }
     );
+  }else{
+    throw new Error('Reset Failed')
   }
+} catch(err){
+  throw new Error('Reset Failed')
+}
 
 }
