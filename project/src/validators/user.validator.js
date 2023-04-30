@@ -19,9 +19,33 @@ export const newUserValidator = (req, res, next) => {
   });
   const { error, value } = schema.validate(req.body);
   if (error) {
+    console.log("erererre",error)
     next(error);
   } else {
     req.validatedBody = value;
     next();
   }
 };
+
+export const loginURIValidator = (req, res, next) => {
+  const schema = Joi.object({
+    email: Joi.string().min(3).required(),
+    password: joiPassword
+      .string()
+      .minOfSpecialCharacters(1)
+      .minOfLowercase(4)
+      .minOfUppercase(1)
+      .minOfNumeric(2)
+      .noWhiteSpaces()
+      .required(),
+  });
+  const { error, value } = schema.validate(req.body);
+  if (error) {
+    next(error);
+  } else {
+    req.validatedBody = value;
+    next();
+  }
+};
+
+
