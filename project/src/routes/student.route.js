@@ -15,7 +15,10 @@ router.post('/enroll', studentAuth, StudentController.enrollInCourse);
 router.get('/quiz/:courseId', studentAuth, StudentController.getQuiz);
 
 router.post('/quiz/:courseId', studentAuth, StudentController.submitQuiz);
+
 router.get('/marks/:courseId',  StudentController.getHighestMarks);
+
+router.post('/cancelCourse',  StudentController.cancelCourse);
 
 
 

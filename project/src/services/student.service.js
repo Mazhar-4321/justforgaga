@@ -81,11 +81,20 @@ export const enrollInCourse = async (body) => {
                 type: QueryTypes.INSERT
             })
         if (response) {
-            return await sequelize.query(`update course set seatsLeft=seatsLeft-1 where c_id=?`
+            var updateCourseSeatsResponse = await sequelize.query(`update course set seatsLeft=seatsLeft-1 where c_id=?`
                 , {
                     replacements: [body.courseId],
                     type: QueryTypes.UPDATE
                 })
+            var couseCertificateDownloadResponse = await sequelize.query(`insert into 
+            course_certificate_download(course_id,student_id,status)
+            values(?,?,0)`, {
+                replacements: [body.courseId, body.studentId],
+                type: QueryTypes.INSERT
+            })
+            if (couseCertificateDownloadResponse) {
+                return 'Success'
+            }
         }
     } catch (err) {
         console.log("err", err)
@@ -151,15 +160,51 @@ export const submitQuiz = async (req) => {
 }
 
 export const getHighestMarks = async (req) => {
-    var paramsArray=req.params.courseId.split(",")
+    var paramsArray = req.params.courseId.split(",")
     const { QueryTypes } = require('sequelize');
-
-    var response = await sequelize.query(`
-    select MAX(s1.m) as max from (select c_id,student_id,marks m
-        from express.quiz_students where c_id=? and student_id=?)s1;`
+    var certificateDownloadResponse = await sequelize.query(`
+select status from course_certificate_download where course_id=? and student_id=?;`
         , {
             replacements: [paramsArray[0], paramsArray[1]],
             type: QueryTypes.SELECT
         })
+    if (response[0].status == 0) {
+        var response = await sequelize.query(`
+    select MAX(s1.m) as max from (select c_id,student_id,marks m
+        from express.quiz_students where c_id=? and student_id=?)s1;`
+            , {
+                replacements: [paramsArray[0], paramsArray[1]],
+                type: QueryTypes.SELECT
+            })
+        if (response[0].max > 6) {
+            return "Success"
+        } else {
+            return "Fail"
+        }
+
+        return response;
+    } else {
+        return "Cant Download , Request Admin For Redownload"
+    }
+}
+
+export const cancelCourse = async (req) => {
+    const { QueryTypes } = require('sequelize');
+    console.log(req.body)
+    //delete from courses_enrolled where c_id='1682909657988' and student_id='rebecca.asely@gmail.com'
+    var response = await sequelize.query(`
+    delete from courses_enrolled where c_id=? and student_id=?`
+        , {
+            replacements: [req.body.courseId, req.body.studentId],
+            type: QueryTypes.DELETE
+        })
+    var response = await sequelize.query(`
+    delete from course_certificate_download where course_id=? and student_id=?`
+        , {
+            replacements: [req.body.courseId, req.body.studentId],
+            type: QueryTypes.DELETE
+        })
+
+
     return response;
 }

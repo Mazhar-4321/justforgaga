@@ -85,3 +85,16 @@ export const myCourses = async (req, res, next) => {
     }
   };
 
+  export const cancelCourse = async (req, res, next) => {
+    try {
+      const data = await StudentService.cancelCourse(req);
+      res.status(HttpStatus.OK).json({
+        code: HttpStatus.OK,
+        data: data,
+        message: 'Course Enrollment Successful'
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+

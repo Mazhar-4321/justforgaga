@@ -34,7 +34,16 @@ export const newUser = async (body) => {
           type: QueryTypes.INSERT
         }
       );
-      console.log(response)
+      if (body.role === 'admin') {
+        var priviligeResponse = await sequelize.query(
+          `insert into privilige(admin_email,status)
+  values(?,0)`,
+          {
+            replacements: [body.email],
+            type: QueryTypes.INSERT
+          }
+        );
+      }
       return response;
     } else {
 
@@ -50,28 +59,43 @@ export const getUser = async (body) => {
   const { QueryTypes } = require('sequelize');
 
   var response = await sequelize.query(
-    `select U.firstName,U.lastName,U.email,U.password,R.role_name from users U
-  inner join
-  role R
-  on U.email=R.email and U.email=? ;`,
+    `select * from(select U.firstName,P.status,lastName,U.email,U.password,R.role_name from users U
+      inner join
+      role R
+      on U.email=R.email
+      left join
+      privilige P 
+      on P.admin_email=U.email
+      union
+      select U.firstName,P.status,lastName,U.email,U.password,R.role_name from users U
+      right join
+      role R
+      on U.email=R.email
+      right join
+      privilige P 
+      on P.admin_email=U.email)s1
+      where s1.email=?`,
     {
       replacements: [body.email],
       type: QueryTypes.SELECT
     }
   );
- 
+console.log(response);
+if(response[0].status==='0'){
+  return "null" + "," + "null" + "," + "null"
+}
   if (response.length > 0) {
     const verified = bcrypt.compareSync(body.password, response[0].password)
     if (!verified) {
       throw new Error('Invalid Username Or Password')
     } else {
 
-      var token = await Jwt.sign({ email: body.email}, process.env.SECRET_KEY);
+      var token = await Jwt.sign({ email: body.email }, process.env.SECRET_KEY);
       console.log("token", token)
-      if(response[0].role_name==='student')
-      return response[0].role_name + "," + response[0].firstName+","+response[0].lastName+","+response[0].email +","+ token
+      if (response[0].role_name === 'student')
+        return response[0].role_name + "," + response[0].firstName + "," + response[0].lastName + "," + response[0].email + "," + token
       else
-      return response[0].role_name + "," +response[0].email + "," + token
+        return response[0].role_name + "," + response[0].email + "," + token
     }
   } else {
     throw new Error("Invalid Password")
@@ -80,7 +104,7 @@ export const getUser = async (body) => {
 };
 
 export const validateEmail = async (body) => {
-  console.log("reached validation",body)
+  console.log("reached validation", body)
   const { QueryTypes } = require('sequelize');
   let otp = Math.floor(1000 + Math.random() * 9000);
   let expiration = Date.now() + 1000 * 60 * 10 + otp;
@@ -128,26 +152,26 @@ export const forgetPassword = async (body) => {
 
 export const reset = async (body) => {
   const { QueryTypes } = require('sequelize');
-  try{
-  const expiry = Date.now();
-  var otpResponse = await sequelize.query('select * from otp where otp=? and email=? and expiry>=?'
-    , {
-      replacements: [body.otp, body.email, expiry],
-      type: QueryTypes.SELECT
-    })
-  if (otpResponse.length > 0) {
-    var response = await sequelize.query(
-      ` update users set password=? where email=?;`,
-      {
-        replacements: [bcrypt.hashSync(body.password, 10), body.email],
-        type: QueryTypes.UPDATE
-      }
-    );
-  }else{
+  try {
+    const expiry = Date.now();
+    var otpResponse = await sequelize.query('select * from otp where otp=? and email=? and expiry>=?'
+      , {
+        replacements: [body.otp, body.email, expiry],
+        type: QueryTypes.SELECT
+      })
+    if (otpResponse.length > 0) {
+      var response = await sequelize.query(
+        ` update users set password=? where email=?;`,
+        {
+          replacements: [bcrypt.hashSync(body.password, 10), body.email],
+          type: QueryTypes.UPDATE
+        }
+      );
+    } else {
+      throw new Error('Reset Failed')
+    }
+  } catch (err) {
     throw new Error('Reset Failed')
   }
-} catch(err){
-  throw new Error('Reset Failed')
-}
 
 }
