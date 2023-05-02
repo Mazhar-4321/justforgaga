@@ -87,56 +87,7 @@ export const updateCourse = async (req) => {
     } catch (err) {
 throw new Error(err)
     }
-    // try {
-    //     const { QueryTypes, JSON } = require('sequelize');
-    //     const course_id = Date.now();
-
-    //     body.url = 'Youtube Video';
-    //     body.seatsLeft = 10;
-    //     console.log(body)
-    //     var courseInsertResponse = await sequelize.query(
-    //         `insert into course(c_id,name,lastDate,duration,seatsLeft,course_description,url)
-    // values(?,?,?,?,?,?,?)`,
-    //         {
-    //             replacements: [course_id, body.name, body.lastDate,
-    //                 body.duration, body.seatsLeft,
-    //                 body.name, body.url],
-    //             type: QueryTypes.INSERT
-    //         }
-    //     );
-    //     var courseInstructorResponse = await sequelize.query(
-    //         `insert into course_notes(c_id,notes)
-    // values${getMultipleValues(course_id, body.notes)}`,
-    //         {
-    //             replacements: [],
-    //             type: QueryTypes.INSERT
-    //         }
-    //     );
-    //     var courseInstructorResponse = await sequelize.query(
-    //         `insert into course_instructor(c_id,instructor)
-    // values(?,?)`,
-    //         {
-    //             replacements: [course_id, body.instructorName],
-    //             type: QueryTypes.INSERT
-    //         }
-    //     );
-    //     var auditResponse = await await sequelize.query(
-    //         `insert into audit(course_id,created_by)
-    // values(?,?)`,
-    //         {
-    //             replacements: [course_id, body.email],
-    //             type: QueryTypes.INSERT
-    //         }
-    //     );
-    //     return auditResponse
-
-
-
-
-    // } catch (err) {
-    //     console.log("err", err);
-    //     throw new Error('invalid')
-    // }
+   
     return null;
 }
 export const checkFiles = async (body) => {
@@ -245,6 +196,14 @@ export const deleteCourse = async (courseId) => {
             type: QueryTypes.DELETE
         }
     );
+    var courseInsertResponse = await sequelize.query(
+        `delete from audit where course_id=?`,
+        {
+            replacements: [courseId],
+            type: QueryTypes.DELETE
+        }
+    );
+
 }
 
 export const deleteNoteById = async (body) => {
@@ -342,6 +301,25 @@ export const getCertificateRequests = async (adminId) => {
     );
     console.log("courses fetched", courses)
     return courses;
+}
+export const getDashBoardDetails=async(adminId)=>{
+    
+const { QueryTypes } = require('sequelize');
+var courses = await sequelize.query(
+    `select audit.course_id,course.name,s1.count from audit 
+    inner join 
+    (select count(c_id) as count,c_id  from courses_enrolled group by c_id)s1 on
+    audit.course_id=s1.c_id
+    inner join course on
+    course.c_id=audit.course_id
+    where audit.created_by=?`,
+    {
+        replacements: [adminId],
+        type: QueryTypes.SELECT
+    }
+);
+console.log("courses fetched", courses)
+return courses;
 }
 
 
