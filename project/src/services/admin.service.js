@@ -54,14 +54,171 @@ export const addCourse = async (body) => {
 
 }
 
+export const updateCourse = async (req) => {
+    console.log(req.body);
+    try {
+        const { QueryTypes, JSON } = require('sequelize');
+        var courseUpdateResponse = await sequelize.query(
+            `update course set name=?,lastDate=?,duration=?,course_description=?
+                where c_id=?`,
+            {
+                replacements: [req.body.name, req.body.lastDate, req.body.duration,
+                req.body.courseDescription, req.body.courseId],
+                type: QueryTypes.UPDATE
+            }
+        );
+        var courseInstructorResponse = await sequelize.query(
+            `update course_instructor set instructor=?
+                where c_id=?`,
+            {
+                replacements: [req.body.instructorName, req.body.courseId],
+                type: QueryTypes.UPDATE
+            }
+        );
+        var courseInstructorResponse = await sequelize.query(
+            `insert into course_notes(c_id,notes)
+    values${getMultipleValues(req.body.courseId, req.body.notes)}`,
+            {
+                replacements: [],
+                type: QueryTypes.INSERT
+            }
+        );
+        return courseInstructorResponse
+    } catch (err) {
+throw new Error(err)
+    }
+    // try {
+    //     const { QueryTypes, JSON } = require('sequelize');
+    //     const course_id = Date.now();
+
+    //     body.url = 'Youtube Video';
+    //     body.seatsLeft = 10;
+    //     console.log(body)
+    //     var courseInsertResponse = await sequelize.query(
+    //         `insert into course(c_id,name,lastDate,duration,seatsLeft,course_description,url)
+    // values(?,?,?,?,?,?,?)`,
+    //         {
+    //             replacements: [course_id, body.name, body.lastDate,
+    //                 body.duration, body.seatsLeft,
+    //                 body.name, body.url],
+    //             type: QueryTypes.INSERT
+    //         }
+    //     );
+    //     var courseInstructorResponse = await sequelize.query(
+    //         `insert into course_notes(c_id,notes)
+    // values${getMultipleValues(course_id, body.notes)}`,
+    //         {
+    //             replacements: [],
+    //             type: QueryTypes.INSERT
+    //         }
+    //     );
+    //     var courseInstructorResponse = await sequelize.query(
+    //         `insert into course_instructor(c_id,instructor)
+    // values(?,?)`,
+    //         {
+    //             replacements: [course_id, body.instructorName],
+    //             type: QueryTypes.INSERT
+    //         }
+    //     );
+    //     var auditResponse = await await sequelize.query(
+    //         `insert into audit(course_id,created_by)
+    // values(?,?)`,
+    //         {
+    //             replacements: [course_id, body.email],
+    //             type: QueryTypes.INSERT
+    //         }
+    //     );
+    //     return auditResponse
+
+
+
+
+    // } catch (err) {
+    //     console.log("err", err);
+    //     throw new Error('invalid')
+    // }
+    return null;
+}
+export const checkFiles = async (body) => {
+    console.log(body);
+    return "null";
+    // const { QueryTypes } = require('sequelize');
+    // var courses = await sequelize.query(
+    //     `SELECT s1.notes,course.name,course.lastDate,course.duration,course.course_description,course_instructor.instructor FROM course
+    //     inner join course_instructor on
+    //     course.c_id=course_instructor.c_id
+    //     inner join (select group_concat(notes) as notes from course_notes where c_id=? group by c_id)s1
+
+    //     where course.c_id=?;`,
+    //     {
+    //         replacements: [courseId,courseId],
+    //         type: QueryTypes.SELECT
+    //     }
+    // );
+    // console.log("course fetched By Id", courses)
+    // if(courses.length>0)
+    // return courses;
+    // else{
+
+    //     var courses = await sequelize.query(
+    //         `SELECT course.name,course.lastDate,course.duration,course.course_description,course_instructor.instructor FROM course
+    //         inner join course_instructor on
+    //         course.c_id=course_instructor.c_id
+
+    //         where course.c_id=?`,
+    //         {
+    //             replacements: [courseId],
+    //             type: QueryTypes.SELECT
+    //         }
+    //     );
+    //     console.log("course fetched By Id", courses)
+    //     if(courses.length>0)
+    //     return courses;
+    // }
+}
+export const getCourseById = async (courseId) => {
+    const { QueryTypes } = require('sequelize');
+    var courses = await sequelize.query(
+        `SELECT s1.notes,course.name,course.lastDate,course.duration,course.course_description,course_instructor.instructor FROM course
+        inner join course_instructor on
+        course.c_id=course_instructor.c_id
+        inner join (select group_concat(notes) as notes from course_notes where c_id=? group by c_id)s1
+        
+        where course.c_id=?;`,
+        {
+            replacements: [courseId, courseId],
+            type: QueryTypes.SELECT
+        }
+    );
+    console.log("course fetched By Id", courses)
+    if (courses.length > 0)
+        return courses;
+    else {
+
+        var courses = await sequelize.query(
+            `SELECT course.name,course.lastDate,course.duration,course.course_description,course_instructor.instructor FROM course
+            inner join course_instructor on
+            course.c_id=course_instructor.c_id
+            
+            where course.c_id=?`,
+            {
+                replacements: [courseId],
+                type: QueryTypes.SELECT
+            }
+        );
+        console.log("course fetched By Id", courses)
+        if (courses.length > 0)
+            return courses;
+    }
+}
 const getMultipleValues = (c_id, notesArray = []) => {
     var string = ''
     for (var i = 0; i < notesArray.length; i++) {
-
+        console.log("This is My Demo", notesArray[i], notesArray[i].path)
         if (i == notesArray.length - 1)
-            string += `('${c_id}','${notesArray[i]}')`
+            string += `('${c_id}','${notesArray[i].path + "~" + notesArray[i].name}')`
         else
-            string += `('${c_id}','${notesArray[i]}'),`
+            string += `('${c_id}','${notesArray[i].path + "~" + notesArray[i].name}'),`
     }
     return string;
 }
@@ -88,6 +245,22 @@ export const deleteCourse = async (courseId) => {
             type: QueryTypes.DELETE
         }
     );
+}
+
+export const deleteNoteById = async (body) => {
+    console.log("reached")
+    console.log(body.courseId)
+    const { QueryTypes } = require('sequelize');
+
+    var courseInsertResponse = await sequelize.query(
+        `delete from course_notes where c_id=? and notes=?`,
+        {
+
+            replacements: [body.courseId, body.fileId],
+            type: QueryTypes.DELETE
+        }
+    );
+    return courseInsertResponse;
 }
 
 export const getAllCourses = async (adminId) => {
@@ -153,7 +326,7 @@ export const addQuiz = async (req) => {
 }
 
 export const getCertificateRequests = async (adminId) => {
-    
+
     const { QueryTypes } = require('sequelize');
     var courses = await sequelize.query(
         `select c.name,cc.student_id from course c
