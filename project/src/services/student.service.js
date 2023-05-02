@@ -162,13 +162,15 @@ export const submitQuiz = async (req) => {
 export const getHighestMarks = async (req) => {
     var paramsArray = req.params.courseId.split(",")
     const { QueryTypes } = require('sequelize');
+    console.log(paramsArray)
     var certificateDownloadResponse = await sequelize.query(`
 select status from course_certificate_download where course_id=? and student_id=?;`
         , {
             replacements: [paramsArray[0], paramsArray[1]],
             type: QueryTypes.SELECT
         })
-    if (response[0].status == 0) {
+        console.log(certificateDownloadResponse)
+    if (certificateDownloadResponse[0].status == 0) {
         var response = await sequelize.query(`
     select MAX(s1.m) as max from (select c_id,student_id,marks m
         from express.quiz_students where c_id=? and student_id=?)s1;`
@@ -176,6 +178,8 @@ select status from course_certificate_download where course_id=? and student_id=
                 replacements: [paramsArray[0], paramsArray[1]],
                 type: QueryTypes.SELECT
             })
+            console.log(response[0])
+           
         if (response[0].max > 6) {
             return "Success"
         } else {
