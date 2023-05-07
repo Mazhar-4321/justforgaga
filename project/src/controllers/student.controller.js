@@ -21,6 +21,19 @@ export const availableCourses = async (req, res, next) => {
   }
 };
 
+export const getImageById = async (req, res, next) => {
+  try {
+    const data = await StudentService.getImageById(req.params.id);
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: data,
+      message: 'All courses fetched successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const myCourses = async (req, res, next) => {
     try {
       const data = await StudentService.myCourses(req.params.email);

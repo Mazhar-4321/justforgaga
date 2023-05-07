@@ -4,7 +4,7 @@ import * as AdminService from '../services/admin.service'
 
 export const addCourse = async (req, res, next) => {
   try {
-    await AdminService.addCourse(req.body);
+    await AdminService.addCourse(req.body,req.files);
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: [],

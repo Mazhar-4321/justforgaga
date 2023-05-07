@@ -87,7 +87,7 @@ if(response[0].status==='0'){
   if (response.length > 0) {
     const verified = bcrypt.compareSync(body.password, response[0].password)
     if (!verified) {
-      throw new Error('Invalid Username Or Password')
+      throw new Error('Invalid  Password')
     } else {
 
       var token = await Jwt.sign({ email: body.email }, process.env.SECRET_KEY);
@@ -98,16 +98,16 @@ if(response[0].status==='0'){
         return response[0].role_name + "," + response[0].email + "," + token
     }
   } else {
-    throw new Error("Invalid Password")
+    throw new Error("Invalid Password or Email")
   }
 
 };
 
 export const validateEmail = async (body) => {
   console.log("reached validation", body)
-  const { QueryTypes } = require('sequelize');
-  let otp = Math.floor(1000 + Math.random() * 9000);
-  let expiration = Date.now() + 1000 * 60 * 10 + otp;
+  const { QueryTypes } = require('sequelize');//ODM , ORM
+  let otp = Math.floor(1000 + Math.random() * 9000);//4 digit otp
+  let expiration = Date.now() + 1000 * 60 * 10 + otp;// expiration
   try {
     var response = await sequelize.query(
       ` insert into otp(otp,email,expiry)
@@ -117,6 +117,7 @@ export const validateEmail = async (body) => {
         type: QueryTypes.INSERT
       }
     );
+    // insert into otp(otp,email,expiry) values(1456,'himnana',123242627)
     console.log("after insert", response)
     if (response) {
       await sendEmail(body.email, `4 digit Otp Expires in 10 mins :${otp}`, 'Email Validation for Registration Process')

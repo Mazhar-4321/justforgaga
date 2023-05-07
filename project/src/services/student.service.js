@@ -1,4 +1,14 @@
 import sequelize from '../config/database';
+const aws = require("aws-sdk");
+const BUCKET = process.env.BUCKET;
+aws.config.update({
+    secretAccessKey: process.env.ACCESS_SECRET,
+    accessKeyId: process.env.ACCESS_KEY,
+    region: process.env.REGION
+})
+const s3 = new aws.S3({
+
+});
 
 
 export const availableCourses = async () => {
@@ -14,6 +24,23 @@ export const availableCourses = async () => {
         })
 
     return response;
+
+}
+
+export const getImageById = async (id) => {
+    const myBucket = BUCKET
+    const myKey = id
+    const signedUrlExpireSeconds = 10
+
+    const url = s3.getSignedUrl('getObject', {
+        Bucket: myBucket,
+        Key: myKey,
+        Expires: signedUrlExpireSeconds,
+        
+        
+    })
+    return url
+
 
 }
 
@@ -169,7 +196,7 @@ select status from course_certificate_download where course_id=? and student_id=
             replacements: [paramsArray[0], paramsArray[1]],
             type: QueryTypes.SELECT
         })
-        console.log(certificateDownloadResponse)
+    console.log(certificateDownloadResponse)
     if (certificateDownloadResponse[0].status == 0) {
         var response = await sequelize.query(`
     select MAX(s1.m) as max from (select c_id,student_id,marks m
@@ -178,8 +205,8 @@ select status from course_certificate_download where course_id=? and student_id=
                 replacements: [paramsArray[0], paramsArray[1]],
                 type: QueryTypes.SELECT
             })
-            console.log(response[0])
-           
+        console.log(response[0])
+
         if (response[0].max > 6) {
             return "Success"
         } else {

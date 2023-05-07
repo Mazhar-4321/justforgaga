@@ -1,6 +1,49 @@
 import sequelize from '../config/database';
 
-export const addCourse = async (body) => {
+
+// const aws = require("aws-sdk");
+// const multer = require("multer");
+// const multers3 = require("multer-s3");
+// const BUCKET = process.env.BUCKET;
+// aws.config.update({
+//     secretAccessKey: process.env.ACCESS_SECRET,
+//     accessKeyId: process.env.ACCESS_KEY,
+//     region: process.env.REGION
+// })
+// const s3 = new aws.S3({
+
+// });
+// const upload = multer({
+//     storage: multers3({
+//         bucket: BUCKET,
+//         s3: s3,
+
+//         key: (req, file, cb) => {
+//             console.log(file)
+//             cb(null, file.originalname+Date.now())
+//         }
+//     })
+// })
+
+
+// router.post(`/upload`, upload.any(), (req, res, next) => {
+//     //res.send(req.file);
+//     console.log(req.files)
+//     // const myBucket = BUCKET
+//     // const myKey = 'myImage.png'
+//     // const signedUrlExpireSeconds = 10
+
+//     // const url = s3.getSignedUrl('getObject', {
+//     //     Bucket: myBucket,
+//     //     Key: myKey,
+//     //     Expires: signedUrlExpireSeconds
+//     // })
+
+//     // res.send(url)
+//     res.send("success")
+// })
+
+export const addCourse = async (body, files) => {
     try {
         const { QueryTypes, JSON } = require('sequelize');
         const course_id = Date.now();
@@ -12,15 +55,15 @@ export const addCourse = async (body) => {
             `insert into course(c_id,name,lastDate,duration,seatsLeft,course_description,url)
     values(?,?,?,?,?,?,?)`,
             {
-                replacements: [course_id, body.name, body.lastDate,
+                replacements: [course_id, body.courseName, body.lastDayToEnroll,
                     body.duration, body.seatsLeft,
-                    body.name, body.url],
+                    body.courseDescription, body.url],
                 type: QueryTypes.INSERT
             }
         );
-        var courseInstructorResponse = await sequelize.query(
+        var courseNotesResponse = await sequelize.query(
             `insert into course_notes(c_id,notes)
-    values${getMultipleValues(course_id, body.notes)}`,
+    values${getMultipleValuesforAWS(course_id,files)}`,
             {
                 replacements: [],
                 type: QueryTypes.INSERT
@@ -85,9 +128,9 @@ export const updateCourse = async (req) => {
         );
         return courseInstructorResponse
     } catch (err) {
-throw new Error(err)
+        throw new Error(err)
     }
-   
+
     return null;
 }
 export const checkFiles = async (body) => {
@@ -170,6 +213,17 @@ const getMultipleValues = (c_id, notesArray = []) => {
             string += `('${c_id}','${notesArray[i].path + "~" + notesArray[i].name}')`
         else
             string += `('${c_id}','${notesArray[i].path + "~" + notesArray[i].name}'),`
+    }
+    return string;
+}
+const getMultipleValuesforAWS = (c_id, notesArray = []) => {
+    var string = ''
+    for (var i = 0; i < notesArray.length; i++) {
+        // console.log("This is My Demo", notesArray[i], notesArray[i].path)
+        if (i == notesArray.length - 1)
+            string += `('${c_id}','${notesArray[i].key}')`
+        else
+            string += `('${c_id}','${notesArray[i].key}'),`
     }
     return string;
 }
@@ -302,24 +356,24 @@ export const getCertificateRequests = async (adminId) => {
     console.log("courses fetched", courses)
     return courses;
 }
-export const getDashBoardDetails=async(adminId)=>{
-    
-const { QueryTypes } = require('sequelize');
-var courses = await sequelize.query(
-    `select audit.course_id,course.name,s1.count from audit 
+export const getDashBoardDetails = async (adminId) => {
+
+    const { QueryTypes } = require('sequelize');
+    var courses = await sequelize.query(
+        `select audit.course_id,course.name,s1.count from audit 
     inner join 
     (select count(c_id) as count,c_id  from courses_enrolled group by c_id)s1 on
     audit.course_id=s1.c_id
     inner join course on
     course.c_id=audit.course_id
     where audit.created_by=?`,
-    {
-        replacements: [adminId],
-        type: QueryTypes.SELECT
-    }
-);
-console.log("courses fetched", courses)
-return courses;
+        {
+            replacements: [adminId],
+            type: QueryTypes.SELECT
+        }
+    );
+    console.log("courses fetched", courses)
+    return courses;
 }
 
 
